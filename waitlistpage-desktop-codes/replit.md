@@ -1,110 +1,100 @@
-# AquilaCyber Waitlist Application
+# replit.md
 
 ## Overview
 
-This is a full-stack web application for AquilaCyber's Learning Management System (LMS) waitlist. The application features a modern, responsive landing page with a cybersecurity theme, allowing users to join a waitlist for early access to the platform. Built with React, Express, and PostgreSQL, it follows a modular architecture with shared types and schemas.
+This project is a modern full-stack web application built with React, Express, and TypeScript. It serves as a cybersecurity learning platform called "AquilaCyberLMS" (also referred to as "HACKRIFT"), featuring course management, user authentication, and interactive learning experiences.
 
 ## System Architecture
 
 ### Frontend Architecture
 - **Framework**: React 18 with TypeScript
+- **UI Framework**: Custom components built with Radix UI primitives and shadcn/ui
+- **Styling**: Tailwind CSS with custom design system
 - **Routing**: Wouter for client-side routing
-- **Styling**: Tailwind CSS with shadcn/ui component library
-- **State Management**: TanStack Query for server state management
-- **UI Components**: Radix UI primitives with custom styling
-- **Build Tool**: Vite for development and production builds
+- **State Management**: TanStack Query (React Query) for server state
+- **Build Tool**: Vite for development and bundling
 
 ### Backend Architecture
-- **Framework**: Express.js with TypeScript
-- **Runtime**: Node.js 20
-- **Development**: tsx for TypeScript execution in development
-- **Production**: esbuild for optimized bundling
+- **Runtime**: Node.js with Express.js
+- **Language**: TypeScript with ESM modules
+- **Database**: PostgreSQL with Drizzle ORM
+- **Database Provider**: Neon Database (@neondatabase/serverless)
+- **Session Management**: In-memory storage (development) with PostgreSQL session store (connect-pg-simple)
 
-### Database Layer
-- **ORM**: Drizzle ORM for type-safe database operations
-- **Database**: PostgreSQL (configured for Neon serverless)
-- **Migrations**: Drizzle Kit for schema management
-- **Schema**: Shared TypeScript schemas with Zod validation
+### Development Environment
+- **Dev Server**: Vite with HMR and Express middleware mode
+- **Build Process**: Vite for frontend, esbuild for backend bundling
+- **TypeScript**: Strict mode enabled with path mapping
 
 ## Key Components
 
-### Client Structure
-```
-client/
-├── src/
-│   ├── pages/
-│   │   ├── Waitinglist.tsx (main landing page)
-│   │   ├── sections/ (modular page sections)
-│   │   └── not-found.tsx
-│   ├── components/ui/ (shadcn/ui components)
-│   ├── lib/ (utilities and query client)
-│   └── hooks/ (custom React hooks)
-```
+### Database Layer
+- **ORM**: Drizzle ORM with PostgreSQL dialect
+- **Schema**: Defined in `shared/schema.ts` with Zod validation
+- **Migrations**: Managed via drizzle-kit in `./migrations` directory
+- **Current Tables**: Users table with username/password authentication
 
-### Server Structure
-```
-server/
-├── index.ts (main server file)
-├── routes.ts (API route definitions)
-├── storage.ts (data layer abstraction)
-└── vite.ts (development server integration)
-```
+### API Layer
+- **Structure**: RESTful API with `/api` prefix
+- **Storage Interface**: Abstracted storage layer (`IStorage`) with in-memory fallback
+- **Error Handling**: Centralized error middleware
+- **Logging**: Request/response logging for API endpoints
+
+### Frontend Components
+- **Design System**: Custom Tailwind configuration with CSS variables
+- **UI Components**: Comprehensive shadcn/ui component library
+- **Layout**: Responsive design with mobile-first approach
+- **Landing Page**: Multi-section layout with hero, features, courses, testimonials
 
 ### Shared Resources
-```
-shared/
-└── schema.ts (database schemas and types)
-```
+- **Type Safety**: Shared TypeScript types between client and server
+- **Schema Validation**: Zod schemas for runtime type checking
+- **Path Aliases**: Configured for clean imports (`@/`, `@shared/`)
 
 ## Data Flow
 
 1. **Client Requests**: React components use TanStack Query for API calls
-2. **API Layer**: Express routes handle HTTP requests with `/api` prefix
-3. **Storage Layer**: Abstract storage interface supports both in-memory and database operations
-4. **Database**: Drizzle ORM manages PostgreSQL interactions with type safety
-5. **Response**: JSON responses flow back through the API to React components
+2. **API Processing**: Express routes handle requests via storage interface
+3. **Database Operations**: Drizzle ORM executes queries against PostgreSQL
+4. **Response Handling**: JSON responses with error handling middleware
+5. **State Updates**: TanStack Query manages cache invalidation and updates
 
 ## External Dependencies
 
-### UI and Styling
-- **Radix UI**: Comprehensive component primitives
-- **Tailwind CSS**: Utility-first CSS framework
-- **Lucide React**: Icon library
-- **Class Variance Authority**: Component variant management
+### Production Dependencies
+- **UI Library**: Radix UI primitives for accessible components
+- **Database**: Neon serverless PostgreSQL
+- **Validation**: Zod for schema validation
+- **Date Handling**: date-fns for date manipulation
+- **Utilities**: clsx, tailwind-merge for CSS class management
 
-### Database and Backend
-- **Neon Database**: Serverless PostgreSQL provider
-- **Drizzle ORM**: Type-safe database toolkit
-- **Express**: Web application framework
-
-### Development Tools
-- **Vite**: Fast build tool with HMR
-- **TypeScript**: Type safety across the stack
-- **ESBuild**: Fast JavaScript bundler for production
+### Development Dependencies
+- **Build Tools**: Vite, esbuild, TypeScript compiler
+- **Development**: tsx for TypeScript execution
+- **Linting**: ESLint configuration (via Vite)
+- **Replit Integration**: Custom Vite plugins for Replit environment
 
 ## Deployment Strategy
 
 ### Development
-- **Environment**: Replit with Node.js 20 and PostgreSQL 16 modules
-- **Hot Reload**: Vite middleware integrated with Express server
-- **Port Configuration**: Development server on port 5000
+- **Local Development**: `npm run dev` starts both frontend and backend
+- **Hot Reload**: Vite HMR for frontend, tsx for backend restart
+- **Database**: `npm run db:push` for schema synchronization
 
-### Production Build
-1. **Frontend**: Vite builds optimized React application to `dist/public`
-2. **Backend**: ESBuild bundles server code to `dist/index.js`
-3. **Deployment**: Replit Autoscale deployment target
-4. **Database**: Environment variable `DATABASE_URL` for PostgreSQL connection
+### Production
+- **Build Process**: `npm run build` creates optimized bundles
+- **Server Bundle**: Backend bundled to `dist/index.js`
+- **Static Assets**: Frontend built to `dist/public`
+- **Startup**: `npm start` runs production server
 
-### Configuration Files
-- **Drizzle Config**: PostgreSQL dialect with migrations output
-- **TypeScript**: Shared configuration for client, server, and shared modules
-- **Tailwind**: Configured for all TypeScript/JSX files with custom theme
-- **Vite**: React plugin with path aliases and Replit-specific plugins
+### Database Management
+- **Schema Changes**: Managed via Drizzle migrations
+- **Environment**: DATABASE_URL required for PostgreSQL connection
+- **Session Storage**: PostgreSQL-backed sessions in production
 
 ## Changelog
 
-Changelog:
-- June 27, 2025. Initial setup
+- June 29, 2025. Initial setup
 
 ## User Preferences
 

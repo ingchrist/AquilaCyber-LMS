@@ -5,13 +5,13 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import NotFound from "@/pages/not-found";
 
-import { Waitinglist } from "@/pages/Waitinglist";
+import { Landingpage } from "@/pages/Landingpage";
 
 function Router() {
   return (
     <Switch>
       {/* Add pages below */}
-      <Route path="/" component={Waitinglist} />
+      <Route path="/" component={Landingpage} />
       {/* Fallback to 404 */}
       <Route component={NotFound} />
     </Switch>

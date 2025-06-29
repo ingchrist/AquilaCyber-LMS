@@ -6,8 +6,26 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        "body-lg": "var(--body-lg-font-family)",
+        "body-lg-bold": "var(--body-lg-bold-font-family)",
+        "body-md-md": "var(--body-md-md-font-family)",
+        "body-sm": "var(--body-sm-font-family)",
+        "display-h2v1": "var(--display-h2v1-font-family)",
+        "display-h5": "var(--display-h5-font-family)",
+        "display-h6": "var(--display-h6-font-family)",
+        "heading-6": "var(--heading-6-font-family)",
+        sans: [
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+          '"Apple Color Emoji"',
+          '"Segoe UI Emoji"',
+          '"Segoe UI Symbol"',
+          '"Noto Color Emoji"',
+        ],
+      },
       colors: {
-        "chartreuse-700": "var(--chartreuse-700)",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
@@ -41,20 +59,6 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-      },
-      fontFamily: {
-        "body-sm": "var(--body-sm-font-family)",
-        "display-h2v1": "var(--display-h2v1-font-family)",
-        "heading-6": "var(--heading-6-font-family)",
-        sans: [
-          "ui-sans-serif",
-          "system-ui",
-          "sans-serif",
-          '"Apple Color Emoji"',
-          '"Segoe UI Emoji"',
-          '"Segoe UI Symbol"',
-          '"Noto Color Emoji"',
-        ],
       },
       borderRadius: {
         lg: "var(--radius)",
